@@ -62,6 +62,6 @@ app.delete('/campgrounds/:id', async (req, res) => {
     await Campground.findByIdAndDelete(id);
     res.redirect('/campgrounds');
 })
-app.listen(8084, () => {
-    console.log('Serving on port 8084')
+app.listen(6084, () => {
+    console.log('Serving on port 6084')
 })
