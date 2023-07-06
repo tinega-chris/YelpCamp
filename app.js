@@ -3,7 +3,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 const Campground = require('./models/campground');
-
+const ejsMate = require('ejs-mate')
 mongoose.connect('mongodb://localhost:27017/yelp-camp', {
     useNewUrlParser: true,
      useUnifiedTopology: true
@@ -23,11 +23,12 @@ app.use(methodOverride('_method'));
 app.get('/', (req, res) => {
     res.render('home')
 });
-/*app.get('/campground', async (req, res) => {
+app.engine('ejs',ejsMate);
+app.get('/campground', async (req, res) => {
     const camp = new Campground ({title:'my Backyard',description:'cheap camping'})
  await camp.save();
  res.send(camp)
-});*/
+});
 app.get('/campgrounds', async(req,res)=>{
     const campgrounds = await Campground.find({});
     res.render("campgrounds/index",{campgrounds})
